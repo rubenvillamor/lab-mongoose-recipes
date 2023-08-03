@@ -15,7 +15,7 @@ mongoose
   .then((x) => {
     console.log(`Connected to the database: "${x.connection.name}"`);
     // Before adding any recipes to the database, let's remove all existing ones
-    return Recipe.deleteMany()
+    return Recipe.deleteMany();
   })
   .then(() => {
     // Run your code here, after you have insured that the connection was made
@@ -36,19 +36,23 @@ mongoose
         "https://i.blogs.es/d40988/lubina-al-horno-mas-facil-del-mundo-pakus-directo-paladar-2-/1366_2000.jpg",
       duration: 45,
       creator: "Uriel",
-    })
-    .then((response)=>{
-      console.log(response.title)
-    })
+    }).then((response) => {
+      console.log(response.title);
+    });
   })
   .then(() => {
-    return Recipe.insertMany(data).then((response) => {
-      response.forEach((eachRecipe) => {
-        console.log(eachRecipe.title);
-      });
-    });
-    // console.log(response)
-    //
+    return Recipe.insertMany(data)
+      .then((response) => {
+        response.forEach((eachRecipe) => {
+          console.log(eachRecipe.title);
+        });
+      })
+      .then(() => {
+        return Recipe.findOneAndUpdate({title: "Rigatoni alla Genovese"}, {duration: 100})
+      })
+      .then(() => {
+        return Recipe.findOneAndDelete({title: "Carrot Cake"})
+      })
   })
 
   // //Read
