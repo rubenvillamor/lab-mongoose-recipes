@@ -48,15 +48,24 @@ mongoose
         });
       })
       .then(() => {
-        return Recipe.findOneAndUpdate({title: "Rigatoni alla Genovese"}, {duration: 100})
+        return Recipe.findOneAndUpdate(
+          { title: "Rigatoni alla Genovese" },
+          { duration: 100 }
+        );
       })
       .then(() => {
-        return Recipe.deleteOne({title: "Carrot Cake"})
-      })
+        return Recipe.deleteOne({ title: "Carrot Cake" });
+      });
   })
-  .then((response)=> {
-    return mongoose.connection.close()
+
+  .then((response) => {
+    return mongoose.connection.close();
   })
+
+  .then(() => {
+    console.log("conexión cerrada");
+  })
+
   .catch((error) => {
     console.error("Error connecting to the database", error);
   });
