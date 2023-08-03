@@ -51,15 +51,12 @@ mongoose
         return Recipe.findOneAndUpdate({title: "Rigatoni alla Genovese"}, {duration: 100})
       })
       .then(() => {
-        return Recipe.findOneAndDelete({title: "Carrot Cake"})
+        return Recipe.deleteOne({title: "Carrot Cake"})
       })
   })
-
-  // //Read
-  //  // console.log(data)
-  // return Recipe
-  // .find({level: {"Amateur Chef"}})
-
+  .then((response)=> {
+    return mongoose.connection.close()
+  })
   .catch((error) => {
     console.error("Error connecting to the database", error);
   });
