@@ -8,11 +8,16 @@ const data = require('./data');
 const MONGODB_URI = 'mongodb://localhost:27017/recipe-app';
 
 // Connection to the database "recipe-app"
+mongoose.connect('mongodb://localhost:27017/recipe-app')
 mongoose
   .connect(MONGODB_URI)
   .then(x => {
     console.log(`Connected to the database: "${x.connection.name}"`);
     // Before adding any recipes to the database, let's remove all existing ones
+    return Model.create({
+      
+
+    })
     return Recipe.deleteMany()
   })
   .then(() => {
